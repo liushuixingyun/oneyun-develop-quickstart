@@ -4,6 +4,8 @@
   "description": "壹耘开发者中心快速入门文档",
   "main": "index.js",
   "scripts": {
+    "build": "node_modules/.bin/gitbook build",
+    "serve": "node_modules/.bin/gitbook serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/liushuixingyun/oneyun-develop-quickstart/issues"
   },
-  "homepage": "https://github.com/liushuixingyun/oneyun-develop-quickstart#readme"
+  "homepage": "https://github.com/liushuixingyun/oneyun-develop-quickstart#readme",
+  "devDependencies": {
+    "gitbook-cli": "^2.3.0"
+  }
 }
