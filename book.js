@@ -24,6 +24,9 @@ module.exports = {
             }, {
                 "lang": "php",
                 "name": "PHP"
+            }, {
+                "lang": "node",
+                "name": "Node.js"
             }]
         }
     }
