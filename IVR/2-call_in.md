@@ -31,8 +31,8 @@ var express = require('express');
 var app = express();
 
 app.get('/ivr', function (req, res) {
-  let ivrResp = new oneyun.Ivr();
-  ivrResp.answer();
+  let ivr = new oneyun.Ivr();
+  ivr.answer();
 });
 ```
 
@@ -48,6 +48,8 @@ $ivr_resp->answer();
 
 echo $ivr_resp;
 ```
+{% common %}
+bla bla ...
 
 {% endmethod %}
 
