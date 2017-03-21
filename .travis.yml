@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "node"
+
+before_script:
+  - node_modules/.bin/gitbook install
+
+script:
+  - npm run build
+
+deploy:
+  - provider: script
+    script: scripts/deploy-develop.sh
+    on:
+      branch: develop
