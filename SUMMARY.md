@@ -7,3 +7,7 @@
     * [1.3 放音](IVR/3-play.md)
     * [1.4 接收按键码输入](IVR/4-input.md)
     * [1.5 外呼拨号](IVR/5-dial.md)
+
+------
+
+* [术语表](GLOSSARY.md)
