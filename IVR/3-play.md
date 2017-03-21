@@ -4,15 +4,13 @@
 
 当你需要使用到`放音`动作时，你需要在我们的平台的用户控制台中，把对应的放音文件进行上传，并等待审核通过。之后在放音动作的xml中，使用放音文件名来指定放音文件。
 
-
 ## IVR 放音动作
 
 IVR放音动作有两种，如下
 
-一：播放单个音乐文件
+一：播放单个声音文件
 
 如给用户播放一个`欢迎引导音乐.wav`的放音文件， IVR放音动作的XML如下：
-
 
 ```xml
 <response>
@@ -26,8 +24,6 @@ IVR放音动作有两种，如下
 二：播放多个音乐文件
 
 如给用户播放3个优惠信息的音乐文件，IVR放音动作的XML如下：
-
-
 
 ```xml
 <response>
@@ -44,11 +40,8 @@ IVR放音动作有两种，如下
 
 简单运用放音的例子：用户呼叫IVR号码，先播放一段音乐，播放完成则挂断。
 
-下面是代码例子：
+下面是 Java 代码片段：
 
-
-{% method -%}
-{% sample lang="java" -%}
 ```java
 @Controller
 @RequestMapping("/rest/test/ivr")
@@ -83,8 +76,3 @@ public class RestTestCallCenterController {
     }
 }
 ```
-{% sample lang="php" -%}
-```
-bla bla
-```
-{% endmethod %}

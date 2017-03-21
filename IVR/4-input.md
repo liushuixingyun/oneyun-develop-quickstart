@@ -1,15 +1,9 @@
 # 接收按键码输入
 
-## DTMF码
-TODO 雪彦补充
-
-
 ## 接收DTMF按键码动作
 IVR收码动作
 
 如给用户播放一个`欢迎音乐.wav` 和 `请输入选择音乐.wav` 的音乐，并且进行收码。IVR收码动作的XML如下：
-
-
 
 ```xml
 <response>
@@ -27,11 +21,8 @@ IVR收码动作
 
 简单运用收码的例子：用户呼叫IVR号码，先播放`欢迎音乐.wav`和`请输入选择音乐.wav` 并进行收码，收码结束后，用户按键是`1`的时候，播放`优惠音乐.wav`；用户按键是`0`则结束。
 
-下面是例子的代码：
+下面是例子的 Java 代码：
 
-
-{% method -%}
-{% sample lang="java" -%}
 ```java
 @Controller
 @RequestMapping("/rest/test/ivr")
@@ -58,7 +49,7 @@ public class RestTestCallCenterController {
     private static final String endAction = "<response>\n" +
             "    <hangup></hangup>\n" +
             "</response>";
-  
+
     @RequestMapping(value="/callback" ,method = RequestMethod.POST,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String callback(HttpServletRequest req, HttpServletResponse res, @RequestBody Map<String, Object> data) {
@@ -88,13 +79,3 @@ public class RestTestCallCenterController {
     }
 }
 ```
-{% sample lang="php" -%}
-
-```php
-<?php
-// code exaple here!
-```
-
-{% endmethod %}
-
-

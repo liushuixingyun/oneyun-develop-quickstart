@@ -22,9 +22,7 @@ IVR流程交互：
 }
 ```
 
-应用服务器对IVR呼入请求的处理器（称为第一步处理器），应做处理，如不做有效处理，则用户呼入被挂断。
-
-
+应用服务器对IVR呼入请求的处理器（称为第一步处理器），应做处理，如不做有效处理，则用户呼入被挂断。其 Java 代码片段如下：
 
 ```java
     @RequestMapping(value="/CallbackURL" ,method = RequestMethod.POST,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
@@ -39,7 +37,7 @@ IVR流程交互：
     }
 ```
 
-IVR动作格式如下：
+IVR XML 如下：
 
 ```xml
 <response>
@@ -52,10 +50,8 @@ IVR动作格式如下：
 
 当应用服务器在`第一步处理器`中返回了一个有有效的IVR动作。且IVR动作中包含 `IVR下一步`，则平台会继续向应用服务器发起请求询问一步操作。此时请求的地址是`IVR下一步`中自定义的地址。
 
-应用服务器对请求IVR下一步的处理器（称为IVR下一步处理器）
+应用服务器对请求IVR下一步的处理器（称为IVR下一步处理器），其 Java 代码片段如下：
 
-{% method -%}
-{% sample lang="java" -%}
 ```java
 	//第二步开始的回调地址
     @RequestMapping(value="next callback url" ,method = RequestMethod.GET,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
@@ -66,12 +62,10 @@ IVR动作格式如下：
         return "next ivr action";
     }
 ```
-{% endmethod %}
 
 平台在每个动作执行完成都会将执行结果向`IVR下一步`发起请求，并询问下一步执行什么动作。
 
 直到某个动作没有`IVR下一步`，或`IVR下一步处理器`返回结束动作或返回空字符串。IVR流程到此结束。
-
 
 ## 将IVR动作组合成场景
 

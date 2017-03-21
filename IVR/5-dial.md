@@ -6,8 +6,6 @@ IVR拨号动作是用于呼叫外线。这里的外线指的是固话或者手�
 
 如IVR中需要连接外线号码是188xxxxxxxx。IVR拨号动作的XML如下：
 
-
-
 ```xml
 <response>
   <dial from="IVR呼出号码"><!-- IVR呼出号码，可以填，也可以不填。需要指定号码的话，需要先在平台购买IVR号码，并绑定到应用下。-->
@@ -19,18 +17,13 @@ IVR拨号动作是用于呼叫外线。这里的外线指的是固话或者手�
 </response>
 ```
 
-
-
 ## 例子
 
 ### 场景一：用户输入按键码选择转人工
 
 用户呼入IVR号码，先播放一段：“欢迎使用壹耘体验系统，查询最新优惠请按1，转人工咨询请按2，结束通话请按0，输入结束请按#"的音乐，然后接收按键码，并做处理。收码是`1`播放最新优惠，收码`2`呼叫外线对应人工，收码`0`结束通话。播放最新优惠结束后，结束通话。转人工结束后，结束通话。
 
-下面是例子的代码：
-
-{% method -%}
-{% sample lang="java" -%}
+下面是例子的 Java 代码片段：
 
 ```java
 @Controller
@@ -67,7 +60,7 @@ public class RestTestCallCenterController {
     private static final String endAction = "<response>\n" +
             "    <hangup></hangup>\n" +
             "</response>";
-  
+
     @RequestMapping(value="/callback" ,method = RequestMethod.POST,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String callback(HttpServletRequest req, HttpServletResponse res, @RequestBody Map<String, Object> data) {
@@ -100,23 +93,11 @@ public class RestTestCallCenterController {
 }
 ```
 
-{% sample lang="php" -%}
-
-```php
-<?php
-// code exaple here!
-```
-
-{% endmethod %}
-
 ### 场景二：用户输入外线号码做外呼
 
-用户呼入IVR号码，先播放一段：“欢迎使用壹耘体验系统，请输入你想要呼出的外线，可以是手机号码或者固话，输入完成按#结束，退出通话请按*"的音乐，然后接收按键码，并做处理。收码到进行呼外线，呼叫失败则返回呼出失败的音乐并结束通话。呼出成功，连通外线。呼外线结束后，结束通话。
+用户呼入IVR号码，先播放一段：“欢迎使用壹耘体验系统，请输入你想要呼出的外线，可以是手机号码或者固话，输入完成按#结束，退出通话请按 **`*`** 的音乐，然后接收按键码，并做处理。收码到进行呼外线，呼叫失败则返回呼出失败的音乐并结束通话。呼出成功，连通外线。呼外线结束后，结束通话。
 
-下面是例子的代码：
-
-{% method -%}
-{% sample lang="java" -%}
+下面是例子的 Java 代码片段：
 
 ```java
 @Controller
@@ -153,7 +134,7 @@ public class RestTestCallCenterController {
     private static final String endAction = "<response>\n" +
             "    <hangup></hangup>\n" +
             "</response>";
-  
+
     @RequestMapping(value="/callback" ,method = RequestMethod.POST,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String callback(HttpServletRequest req, HttpServletResponse res, @RequestBody Map<String, Object> data) {
@@ -171,7 +152,7 @@ public class RestTestCallCenterController {
       if("*".equals(keys)){//返回结束
          return endAction;
       }else {//进行外呼，可以在此处验证输入的是否是固话或手机号码，例子没做验证
-        String newCallOutsideLineAciton = callOutsideLineAction.replace("{phone}",keys); 
+        String newCallOutsideLineAciton = callOutsideLineAction.replace("{phone}",keys);
         return newCallOutsideLineAciton;
       }
       return "";
@@ -183,7 +164,7 @@ public class RestTestCallCenterController {
         return callFailAction;
       }else{//呼叫成功，外线结束，断开通话
         return endAction;
-      } 
+      }
     }
     @RequestMapping(value="/end" ,method = RequestMethod.GET)
     @ResponseBody
@@ -193,12 +174,3 @@ public class RestTestCallCenterController {
     }
 }
 ```
-
-{% sample lang="php" -%}
-
-```php
-<?php
-// code exaple here!
-```
-
-{% endmethod %}
