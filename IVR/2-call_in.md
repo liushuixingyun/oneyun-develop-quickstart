@@ -44,7 +44,7 @@ IVR XML 如下：
     <play finish_keys="#"><!-- 当天动作是放音play-->
       welcome.wav
     </play>
-    <next>next callback url</next><!-- 称为IVR下一步：当前动作处理结束，平台请求的新的地址，用来询问下一步执行什么动作；如果没有这个地址，则在该动作处理完之后，平台结束IVR流程 -->
+    <next>next-callback-url</next><!-- 称为IVR下一步：当前动作处理结束，平台请求的新的地址，用来询问下一步执行什么动作；如果没有这个地址，则在该动作处理完之后，平台结束IVR流程 -->
 </response>
 ```
 
@@ -54,7 +54,7 @@ IVR XML 如下：
 
 ```java
 	//第二步开始的回调地址
-    @RequestMapping(value="next callback url" ,method = RequestMethod.GET,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
+    @RequestMapping(value="next-callback-url" ,method = RequestMethod.GET,consumes = "application/json;charset=utf-8",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String handle(HttpServletRequest req, HttpServletResponse res,@RequestParam String type,@RequestParam String error)  {
       //type 上个动作的标签名称 error上个动作执行错误的信息
@@ -66,19 +66,3 @@ IVR XML 如下：
 平台在每个动作执行完成都会将执行结果向`IVR下一步`发起请求，并询问下一步执行什么动作。
 
 直到某个动作没有`IVR下一步`，或`IVR下一步处理器`返回结束动作或返回空字符串。IVR流程到此结束。
-
-## 将IVR动作组合成场景
-
-常用的流程如：用户拨打IVR号码进行查业务情况，查完之后转人工处理，人工处理完后，提示用户给评分。
-
-对这个流程进行分解：
-
-1. 用户呼叫IVR号码->平台请求应用服务器-->应用服务器的`第一步处理器`，返回`收码`动作(给用户播放欢迎或引导音，并收码)
-2. 用户在手机输入按键码1，查询最新优惠->平台收码完成，平台请求应用服务器->应用服务器的`下一步处理器`，收到用户的输入码，返回`放音`动作（给用户播放最新优惠的音乐）
-3. 平台执行`放音`动作完成，平台请求应用服务器->应用服务器的`下一步处理器`，返回`收码`动作(给用户播放欢迎或引导音，并收码)
-4. 用户在手机输入按键码0，转人工->平台收码完成，平台请求应用服务器->应用服务器的`下一步处理器`，收到用户的输入码，返回`IVR拨号`动作（IVR开始呼叫坐席）
-5. 用户和坐席连通，进行交流，交流结束，坐席挂断->平台收到挂断事件，平台请求应用服务器->应用服务器的`下一步处理器`，返回`收码`动作(播放引导用户评价音乐，并收码)
-6. 用户在手机输入按键码10（满分）->平台收码完成，平台请求应用服务器->应用服务器的`下一步处理器`收到用户的输入码，更新坐席评分，并返回`结束`动作
-7. 用户断开连接， IVR 流程结束
-
-上面流程中包含以下动作：`放音`，`收码`，`IVR拨号` 。下面的章节，将对这三个动作进行解析。

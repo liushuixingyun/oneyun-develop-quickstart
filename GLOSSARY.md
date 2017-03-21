@@ -3,3 +3,6 @@ IVR(Interactive Voice Response)即互动式语音应答，您只须用电话即�
 
 ## ONEYUN
 请访问 http://oneyun.com/
+
+## IVR
+交互式声音应答
