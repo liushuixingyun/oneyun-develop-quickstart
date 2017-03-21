@@ -6,6 +6,8 @@ module.exports = {
     language: "zh",
     gitbook: '3.2.2',
     plugins: [
+        {name:'docs-theme', version: 'git+https://github.com/liushuixingyun/gitbook-plugin-docs-theme.git'},
+        'sitemap',
         '-sharing',
         'toc',
         'codetabs',
@@ -15,6 +17,9 @@ module.exports = {
         version: pkg.version
     },
     pluginsConfig: {
+        sitemap: {
+            hostname: "https://github.com/liushuixingyun/yunhuni-platform-docs"
+        },
         "theme-api": {
             "theme": "dark",
             "languages": [{
