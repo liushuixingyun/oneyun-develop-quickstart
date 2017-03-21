@@ -1,7 +1,7 @@
 var pkg = require('./package.json');
 
 module.exports = {
-    title: "快速入门",
+    title: pkg.description,
     author: "ONEYUN Team",
     language: "zh",
     gitbook: '3.2.2',
@@ -12,7 +12,8 @@ module.exports = {
         "theme-api"
     ],
     variables: {
-        version: pkg.version
+        version: pkg.version,
+        description: pkg.description
     },
     pluginsConfig: {
         "theme-api": {
