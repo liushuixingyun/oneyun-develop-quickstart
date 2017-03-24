@@ -1,6 +1,9 @@
 # Summary
 
 * [前言](README.md)
+
+------
+
 * [1. IVR 入门](IVR/README.md)
     * [1.1 准备工作](IVR/1-prepare.md)
     * [1.2 处理电话呼入](IVR/2-call_in.md)
